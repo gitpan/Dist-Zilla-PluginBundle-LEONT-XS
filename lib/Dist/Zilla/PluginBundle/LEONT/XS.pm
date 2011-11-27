@@ -1,6 +1,6 @@
 package Dist::Zilla::PluginBundle::LEONT::XS;
 {
-  $Dist::Zilla::PluginBundle::LEONT::XS::VERSION = '0.001';
+  $Dist::Zilla::PluginBundle::LEONT::XS::VERSION = '0.002';
 }
 use Moose;
 use Dist::Zilla;
@@ -19,8 +19,14 @@ sub configure {
 		-bundle => '@Basic',
 		-remove => ['MakeMaker'],
 	});
-	$self->add_plugins('ModuleBuild');
-	$self->add_bundle('@LEONT::Base');
+	if ($self->payload->{use_custom}) {
+		$self->add_plugins('ModuleBuild::Custom');
+		$self->add_plugins('Meta::Dynamic::Config');
+	}
+	else {
+		$self->add_plugins('ModuleBuild');
+	}
+	$self->add_bundle('@LEONT::Base', $self->config_slice('skip_kwalitee'));
 	return;
 }
 
@@ -32,11 +38,11 @@ sub configure {
 
 =head1 NAME
 
-Dist::Zilla::PluginBundle::LEONT::XS - Plugins LeonT uses for XS modules
+Dist::Zilla::PluginBundle::LEONT::XS
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 DESCRIPTION
 
@@ -46,6 +52,15 @@ This is currently identical to the following setup:
     -bundle = @Basic
     -remove = MakeMaker
     [ModuleBuild]
+    [@LEONT::Base]
+
+Unless the C<use_custom> option is set in dist.ini, in which case it's equal to 
+
+    [@Filter]
+    -bundle = @Basic
+    -remove = MakeMaker
+    [ModuleBuild::Custom]
+    [Meta::Dynamic::Config]
     [@LEONT::Base]
 
 =for Pod::Coverage configure
@@ -69,4 +84,3 @@ __END__
 #ABSTRACT: Plugins LeonT uses for XS modules
 
 
-1;

@@ -4,7 +4,7 @@
       "Leon Timmermans <leont@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300000, CPAN::Meta::Converter version 2.110440",
+   "generated_by" : "Dist::Zilla version 4.300003, CPAN::Meta::Converter version 2.112150",
    "license" : [
       "perl_5"
    ],
@@ -27,7 +27,9 @@
       "runtime" : {
          "requires" : {
             "Dist::Zilla" : 0,
+            "Dist::Zilla::Plugin::Meta::Dynamic::Config" : 0,
             "Dist::Zilla::Plugin::ModuleBuild" : 0,
+            "Dist::Zilla::Plugin::ModuleBuild::Custom" : 0,
             "Dist::Zilla::PluginBundle::Basic" : 0,
             "Dist::Zilla::PluginBundle::Filter" : 0,
             "Dist::Zilla::PluginBundle::LEONT::Base" : "0.003",
@@ -58,6 +60,6 @@
          "web" : "http://github.com/Leont/dist-zilla-pluginbundle-LEONT-XS"
       }
    },
-   "version" : "0.001"
+   "version" : "0.002"
 }
 

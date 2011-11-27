@@ -22,14 +22,16 @@ my %module_build_args = (
     "Leon Timmermans <leont\@cpan.org>"
   ],
   "dist_name" => "Dist-Zilla-PluginBundle-LEONT-XS",
-  "dist_version" => "0.001",
+  "dist_version" => "0.002",
   "license" => "perl",
   "module_name" => "Dist::Zilla::PluginBundle::LEONT::XS",
   "recommends" => {},
   "recursive_test_files" => 1,
   "requires" => {
     "Dist::Zilla" => 0,
+    "Dist::Zilla::Plugin::Meta::Dynamic::Config" => 0,
     "Dist::Zilla::Plugin::ModuleBuild" => 0,
+    "Dist::Zilla::Plugin::ModuleBuild::Custom" => 0,
     "Dist::Zilla::PluginBundle::Basic" => 0,
     "Dist::Zilla::PluginBundle::Filter" => 0,
     "Dist::Zilla::PluginBundle::LEONT::Base" => "0.003",
