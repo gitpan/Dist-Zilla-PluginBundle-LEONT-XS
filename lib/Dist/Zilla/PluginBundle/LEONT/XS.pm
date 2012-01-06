@@ -1,10 +1,11 @@
 package Dist::Zilla::PluginBundle::LEONT::XS;
 {
-  $Dist::Zilla::PluginBundle::LEONT::XS::VERSION = '0.002';
+  $Dist::Zilla::PluginBundle::LEONT::XS::VERSION = '0.003';
 }
 use Moose;
 use Dist::Zilla;
-with 'Dist::Zilla::Role::PluginBundle::Easy';
+extends 'Dist::Zilla::PluginBundle::LEONT::Base';
+with qw/Dist::Zilla::Role::PluginBundle::Easy Dist::Zilla::Role::PluginBundle::Config::Slicer/;
 
 has use_modern => (
 	is => 'ro',
@@ -12,13 +13,13 @@ has use_modern => (
 	default => 0,
 );
 
+my @basic = qw/GatherDir PruneCruft ManifestSkip MetaYAML License Readme ExtraTests ExecDir ShareDir Manifest TestRelease ConfirmRelease UploadToCPAN/; # left out MakeMaker
+
 sub configure {
 	my $self = shift;
 
-	$self->add_bundle('@Filter' => {
-		-bundle => '@Basic',
-		-remove => ['MakeMaker'],
-	});
+	$self->add_plugins(@basic);
+
 	if ($self->payload->{use_custom}) {
 		$self->add_plugins('ModuleBuild::Custom');
 		$self->add_plugins('Meta::Dynamic::Config');
@@ -26,7 +27,7 @@ sub configure {
 	else {
 		$self->add_plugins('ModuleBuild');
 	}
-	$self->add_bundle('@LEONT::Base', $self->config_slice('skip_kwalitee'));
+	$self->SUPER::configure;
 	return;
 }
 
@@ -42,7 +43,7 @@ Dist::Zilla::PluginBundle::LEONT::XS
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 DESCRIPTION
 
