@@ -1,11 +1,11 @@
 package Dist::Zilla::PluginBundle::LEONT::XS;
 {
-  $Dist::Zilla::PluginBundle::LEONT::XS::VERSION = '0.003';
+  $Dist::Zilla::PluginBundle::LEONT::XS::VERSION = '0.004';
 }
 use Moose;
 use Dist::Zilla;
 extends 'Dist::Zilla::PluginBundle::LEONT::Base';
-with qw/Dist::Zilla::Role::PluginBundle::Easy Dist::Zilla::Role::PluginBundle::Config::Slicer/;
+with qw/Dist::Zilla::Role::PluginBundle::Easy Dist::Zilla::Role::PluginBundle::PluginRemover Dist::Zilla::Role::PluginBundle::Config::Slicer/;
 
 has use_modern => (
 	is => 'ro',
@@ -33,17 +33,19 @@ sub configure {
 
 1;
 
+#ABSTRACT: Plugins LeonT uses for XS modules
+
 
 
 =pod
 
 =head1 NAME
 
-Dist::Zilla::PluginBundle::LEONT::XS
+Dist::Zilla::PluginBundle::LEONT::XS - Plugins LeonT uses for XS modules
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 DESCRIPTION
 
@@ -81,7 +83,5 @@ the same terms as the Perl 5 programming language system itself.
 
 
 __END__
-
-#ABSTRACT: Plugins LeonT uses for XS modules
 
 
